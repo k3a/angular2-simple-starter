@@ -2,11 +2,6 @@
 const {
   ContextReplacementPlugin,
   DefinePlugin,
-  // Output “dll” bundles. Dll bundles doesn’t execute any of your module’s code.
-  DllPlugin,
-  // References a dll function which is expected to be available.
-  DllReferencePlugin,
-  // Hook into the compiler to extract progress information
   ProgressPlugin,
   NoErrorsPlugin
 } = require('webpack');
@@ -18,8 +13,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { root, hasProcessFlag } = require('./webpack.utils.js');
 
+// host to bind devserver to
 const HOST = 'localhost';
+// port to listen at
 const PORT = 8080;
+// exclude these sourcemaps
 const EXCLUDE_SOURCE_MAPS = [
   // these packages have problems with their sourcemaps
   root('node_modules/@angular'),
@@ -66,7 +64,8 @@ var loaders = [
     exclude: [/\.(spec|e2e|d)\.ts$/]
   },
   // merge all css used in src/app (angular) into js files
-  { test: /\.css$/, include: root('src/app'), loader: 'raw!postcss' }
+  { test: /\.css$/, include: root('src/app'), loader: 'raw!postcss' },
+  { test: /\.html/, loader: 'raw-loader', exclude: [root('src/index.html')] }
 ];
 
 if (HMR) {
@@ -95,13 +94,6 @@ if (HMR) {
 module.exports = function makeWebpackConfig() {
   var config = {};
 
-  // devtool
-  if (PROD) {
-    config.devtool = 'source-map';
-  } else {
-    config.devtool = 'eval-source-map';
-  }
-
   // entry
   config.entry = {
     //  'polyfills': './src/polyfills.ts',
@@ -109,7 +101,7 @@ module.exports = function makeWebpackConfig() {
   };
 
   config.resolve = {
-    extensions: ['.ts', '.js', '.json']
+    extensions: ['.ts', '.js']
   };
 
   config.module = {
@@ -141,7 +133,7 @@ module.exports = function makeWebpackConfig() {
 
   if (PROD) {
     config.plugins.push(
-      // When there are errors while compiling this plugin skips the emitting phase
+      // When there are errors while compiling, this plugin skips the emitting phase
       // (and recording phase), so there are no assets emitted that include errors.
       new NoErrorsPlugin(),
       // Mangles and optimizes resulting bundle
@@ -156,14 +148,20 @@ module.exports = function makeWebpackConfig() {
     );
   }
 
+  // cache generated modules and chunks to improve performance
+  // for multiple incremental builds
   config.cache = true;
+
+  // developer tool to enhance debugging
   config.devtool = PROD ? 'source-map' : config.devtool = 'eval';
 
+  // putput bundle target
   config.output = {
     path: root('dist'),
     filename: 'index.js'
   };
 
+  // development serer config
   config.devServer = {
     contentBase: AOT ? COMPILED_DIR : root('src/public'),
     host: HOST,
