@@ -16,11 +16,11 @@
   },
   "exclude": [
     "node_modules",
-    "src/compiled",
+    "compiled",
     "src/**/*.e2e.ts",
     "src/**/*.spec.ts",
     "src/server.ts",
-    "src/main.browser.aot.ts"
+    "src/main.aot.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
@@ -31,7 +31,7 @@
   "buildOnSave": false,
   "atom": { "rewriteTsconfig": false },
   "angularCompilerOptions": {
-   "genDir": "src/compiled",
+   "genDir": "compiled",
    "skipMetadataEmit" : true
  }
 }

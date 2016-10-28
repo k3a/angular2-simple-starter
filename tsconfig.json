@@ -15,7 +15,7 @@
   },
   "exclude": [
     "node_modules",
-    "src/compiled"
+    "compiled"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,

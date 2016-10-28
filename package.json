@@ -1,12 +1,47 @@
 {
   "name": "app",
   "version": "0.0.0",
+  "description": "Angular2 starter",
+  "repository": "''",
   "license": "MIT",
   "scripts": {
-    "clean": "rimraf node_modules doc dist && npm cache clean"
+    "clean": "rimraf node_modules doc dist compiled && npm cache clean",
+    "start": "webpack-dev-server --inline --hot"
   },
   "dependencies": {
+    "@angular/common": "^2.1.2",
+    "@angular/compiler": "^2.1.2",
+    "@angular/core": "^2.1.2",
+    "@angular/forms": "^2.1.2",
+    "@angular/http": "^2.1.2",
+    "@angular/platform-browser": "^2.1.2",
+    "@angular/platform-browser-dynamic": "^2.1.2",
+    "@angular/router": "^3.1.2",
+    "rxjs": "^5.0.0-beta.12",
+    "zone.js": "^0.6.26"
   },
   "devDependencies": {
+    "@angularclass/hmr": "^1.2.1",
+    "@angularclass/hmr-loader": "^3.0.2",
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.46",
+    "angular2-router-loader": "^0.3.3",
+    "angular2-template-loader": "^0.5.0",
+    "awesome-typescript-loader": "^2.2.4",
+    "codelyzer": "^1.0.0-beta.3",
+    "copy-webpack-plugin": "^4.0.0",
+    "core-js": "^2.4.1",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "html-webpack-plugin": "^2.24.0",
+    "postcss-loader": "^1.1.0",
+    "raw-loader": "^0.5.1",
+    "source-map-loader": "^0.1.5",
+    "style-loader": "^0.13.1",
+    "ts-helpers": "^1.1.2",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.6",
+    "webpack": "^2.1.0-beta.25",
+    "webpack-dev-server": "^2.1.0-beta.9"
   }
 }
