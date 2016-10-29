@@ -14,7 +14,7 @@
     "compile:aot": "npm run clean:compiled && npm run ngc && npm run build:aot:prod",
     "build:aot:prod": "npm run clean:dist && webpack",
     "ngc": "ngc -p tsconfig.aot.json",
-	"prodserv": "cd dist && static-server -p 8080 -n index.html"
+    "prodserv": "cd dist && static-server -p 8080 -n index.html"
   },
   "dependencies": {
     "@angular/common": "^2.1.2",
@@ -23,7 +23,7 @@
     "@angular/platform-browser": "^2.1.2",
     "@angular/platform-browser-dynamic": "^2.1.2",
     "@angular/router": "^3.1.2",
-    "rxjs": "^5.0.0-beta.12",
+    "rxjs": "5.0.0-beta.12",
     "zone.js": "^0.6.26"
   },
   "devDependencies": {
