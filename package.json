@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.1.2",
+    "@angularclass/hmr": "^1.2.1",
     "@angularclass/hmr-loader": "^3.0.2",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.46",
