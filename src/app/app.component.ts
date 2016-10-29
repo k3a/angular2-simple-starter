@@ -5,7 +5,7 @@ import { ApiService } from './shared';
 import '../style/app.css';
 
 @Component({
-  selector: 'my-app', // <my-app></my-app>
+  selector: 'app', // <app></app>
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
