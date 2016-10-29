@@ -6,7 +6,15 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf node_modules doc dist compiled && npm cache clean",
-    "start": "webpack-dev-server --inline --hot"
+    "clean:compiled": "rimraf compiled",
+    "clean:dist": "rimraf dist",
+    "start": "npm run start:hmr",
+    "start:hmr": "webpack-dev-server --inline --hot",
+    "compile": "npm run compile:aot",
+    "compile:aot": "npm run clean:compiled && npm run ngc && npm run build:aot:prod",
+    "build:aot:prod": "npm run clean:dist && webpack",
+    "ngc": "ngc -p tsconfig.aot.json",
+	"prodserv": "cd dist && static-server -p 8080 -n index.html"
   },
   "dependencies": {
     "@angular/common": "^2.1.2",
@@ -21,6 +29,7 @@
     "zone.js": "^0.6.26"
   },
   "devDependencies": {
+    "@angular/compiler-cli": "^2.1.2",
     "@angularclass/hmr": "^1.2.1",
     "@angularclass/hmr-loader": "^3.0.2",
     "@types/core-js": "^0.9.34",
@@ -36,7 +45,9 @@
     "html-webpack-plugin": "^2.24.0",
     "postcss-loader": "^1.1.0",
     "raw-loader": "^0.5.1",
+    "rimraf": "^2.5.4",
     "source-map-loader": "^0.1.5",
+    "static-server": "^2.0.3",
     "style-loader": "^0.13.1",
     "ts-helpers": "^1.1.2",
     "tslint": "^3.15.1",

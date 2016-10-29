@@ -15,19 +15,22 @@ const { root, hasProcessFlag } = require('./webpack.utils.js');
 
 // host to bind devserver to
 const HOST = 'localhost';
+
 // port to listen at
 const PORT = 8080;
+
 // exclude these sourcemaps
 const EXCLUDE_SOURCE_MAPS = [
   // these packages have problems with their sourcemaps
   root('node_modules/@angular'),
   root('node_modules/rxjs')
 ]
+
 // directory with compiled ts files
 // must match tsconfig*
-const COMPILED_DIR = root("compiled");
+const COMPILED_APP_DIR = root("compiled/src/app");
 
-// Get npm lifecycle event to identify the environment
+// get npm lifecycle event to identify the environment
 const EVENT = process.env.npm_lifecycle_event || '';
 const PROD = EVENT.includes('prod');
 const AOT = EVENT.includes('aot');
@@ -47,6 +50,7 @@ const CONSTANTS = {
   PORT: PORT
 };
 
+// webpack loaders
 var loaders = [
   {
     test: /\.js$/,
@@ -59,7 +63,7 @@ var loaders = [
       '@angularclass/hmr-loader',
       'awesome-typescript-loader',
       'angular2-template-loader',
-      'angular2-router-loader?loader=system&genDir=' + COMPILED_DIR + '/src/app&aot=' + AOT
+      'angular2-router-loader?loader=system&genDir=' + COMPILED_APP_DIR + '&aot=' + AOT
     ],
     exclude: [/\.(spec|e2e|d)\.ts$/]
   },
@@ -114,6 +118,7 @@ module.exports = function makeWebpackConfig() {
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       root('src')
     ),
+	// show build progress
     new ProgressPlugin(),
     // does type checking in a separate process, so webpack doesn't need to wait.
     // Significantly improves development workflow
@@ -126,7 +131,9 @@ module.exports = function makeWebpackConfig() {
     new NamedModulesPlugin(),
     // Adding JS and CSS into a HTML template
     new HtmlWebpackPlugin({
-      template: root('src/public/index.html'),
+	  filename: 'index.html',
+      title: 'Angular 2 App',
+      template: root('src/public/index.ejs'),
       chunksSortMode: 'dependency'
     })
   ];
@@ -143,7 +150,7 @@ module.exports = function makeWebpackConfig() {
       }),
       // Copy assets from the public folder
       new CopyWebpackPlugin([{ from: root('src/public') }], {
-        ignore: [root('src/public/index.html')]
+        ignore: [root('src/public/index.ejs')]
       })
     );
   }
@@ -163,7 +170,7 @@ module.exports = function makeWebpackConfig() {
 
   // development serer config
   config.devServer = {
-    contentBase: AOT ? COMPILED_DIR : root('src/public'),
+    contentBase: AOT ? COMPILED_APP_DIR : root('src/public'),
     host: HOST,
     port: PORT,
     historyApiFallback: true,
