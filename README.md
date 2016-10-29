@@ -4,6 +4,9 @@ Tired of complicated starters with 300MB of dependencies which are hard to under
 
 Try this simple well-commented starter with minimum dependencies.
 
+I made it for myself to set up a clean well-understandable build process which will build
+small release app, while allowing fast iterations with HMR (hot module reload).
+
 Inspired by [@alicoding/react-webpack-babel](https://github.com/alicoding/react-webpack-babel).
 
 ### What's this and what's in it?
@@ -52,9 +55,20 @@ Will compile Angular templates (AOT) and build final product into `./dist` direc
 > $ npm run prodserv
 ```
 
+### AOT Don'ts
+
+According to [angular-webpack2-starter](https://github.com/qdouble/angular-webpack2-starter), the  following things will make AOT compilation fail:
+
+- Don’t use require statements for your templates or styles, use styleUrls and templateUrls, the angular2-template-loader plugin will change it to require at build time.
+- Don’t use default exports.
+- Don’t use form.controls.controlName, use form.get(‘controlName’)
+- Don’t use control.errors?.someError, use control.hasError(‘someError’)
+- Don’t use functions in your providers, routes or declarations, export a function and then reference that function name
+- Inputs, Outputs, View or Content Child(ren), Hostbindings, and any field you use from the template or annotate for Angular should be public
+
 ### Nginx Config
 
-Here is a suggested Nginx config:
+Here is an example Nginx config:
 ```
 server {
 	# ... root and other options
@@ -62,6 +76,10 @@ server {
 	gzip on;
 	gzip_http_version 1.1;
 	gzip_types text/plain text/css text/xml application/javascript image/svg+xml;
+
+	location / {
+		try_files $uri /index.html;
+	}
 
 	location ~ \.html?$ {
 		expires 1d;
@@ -80,9 +98,8 @@ Please contribute to the project if you think something can be done better, incl
 
 ### Credits
 
-Inspired by these repos:
+Inspired by these starters:
 
 * [@preboot/angular2-webpack](https://github.com/preboot/angular2-webpack)
 * [@qdouble/angular-webpack2-starter](https://github.com/qdouble/angular-webpack2-starter)
-* [@ngrx/example-app](https://github.com/ngrx/example-app)
 

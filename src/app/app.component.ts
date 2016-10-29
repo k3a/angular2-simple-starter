@@ -10,7 +10,7 @@ import '../style/app.css';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  url = 'https://github.com/k3a/angular2-k3a';
+  url = 'https://github.com/k3a/angular2-simple-starter';
 
   constructor(public api: ApiService) {
     // Do something with api
