@@ -74,13 +74,13 @@ var loaders = [
 
 if (HMR) {
   loaders.push(
-  // include global css in <style> tags for HMR
-  {
-    test: /\.css$/,
-    exclude: root('src/app'),
-    loader: ['style','css']
-  }
-);
+    // include global css in <style> tags for HMR
+    {
+      test: /\.css$/,
+      exclude: root('src/app'),
+      loader: ['style','css']
+    }
+  );
 } else {
   loaders.push(
     // global css into a separate css bundle file
@@ -118,7 +118,7 @@ module.exports = function makeWebpackConfig() {
       /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
       root('src')
     ),
-	// show build progress
+    // show build progress
     new ProgressPlugin(),
     // does type checking in a separate process, so webpack doesn't need to wait.
     // Significantly improves development workflow
@@ -131,7 +131,7 @@ module.exports = function makeWebpackConfig() {
     new NamedModulesPlugin(),
     // Adding JS and CSS into a HTML template
     new HtmlWebpackPlugin({
-	  filename: 'index.html',
+      filename: 'index.html',
       title: 'Angular 2 App',
       template: root('src/public/index.ejs'),
       chunksSortMode: 'dependency'
@@ -150,7 +150,7 @@ module.exports = function makeWebpackConfig() {
       }),
       // Copy assets from the public folder
       new CopyWebpackPlugin([{ from: root('src/public') }], {
-        ignore: [root('src/public/index.ejs')]
+        ignore: ['*.ejs']
       })
     );
   }

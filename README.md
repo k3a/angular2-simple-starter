@@ -1,6 +1,6 @@
 ## Simple Angular 2 Starter
 
-Tired of complicated starters with 200MB of dependencies which are hard to understand and modify?
+Tired of complicated starters with 300MB of dependencies which are hard to understand and modify?
 
 Try this simple well-commented starter with minimum dependencies.
 
@@ -12,6 +12,7 @@ Inspired by [@alicoding/react-webpack-babel](https://github.com/alicoding/react-
 * Webpack configuration for development (with hot reloading) and production (AOT, minification)
 * CSS module loading, so you can import global styles using `import`
 * Router because every nontrivial app needs it
+* Postcss with autoprefixer as en example of configuring webpack loaders
 * Nothing else because who needs tests or other features, can add them
 
 ### To run
