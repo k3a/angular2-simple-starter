@@ -11,6 +11,7 @@ Inspired by [@alicoding/react-webpack-babel](https://github.com/alicoding/react-
 * Simple example modular Angular 2 app with CSS
 * Webpack configuration for development (with hot reloading) and production (AOT, minification)
 * CSS module loading, so you can import global styles using `import`
+* Router because every nontrivial app needs it
 * Nothing else because who needs tests or other features, can add them
 
 ### To run
