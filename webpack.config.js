@@ -69,7 +69,8 @@ var loaders = [
   },
   // merge all css used in src/app (angular) into js files
   { test: /\.css$/, include: root('src/app'), loader: 'raw!postcss' },
-  { test: /\.html/, loader: 'raw-loader', exclude: [root('src/index.html')] }
+  { test: /\.html/, loader: 'raw-loader', exclude: [root('src/index.html')] },
+  { test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/, loader: 'file?name=[name].[hash].[ext]?'}
 ];
 
 if (HMR) {
