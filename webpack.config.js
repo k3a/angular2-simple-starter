@@ -171,7 +171,7 @@ module.exports = function makeWebpackConfig() {
 
   // development serer config
   config.devServer = {
-    contentBase: AOT ? COMPILED_APP_DIR : root('src/public'),
+    contentBase: root('src/public'),
     host: HOST,
     port: PORT,
     historyApiFallback: true,
