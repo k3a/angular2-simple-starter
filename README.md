@@ -1,5 +1,7 @@
 ## Simple Angular 2 Starter
 
+## !!!DEPRECATED!!! You should use [Angular CLI](http://github.com/angular/angular-cli/) now.
+
 Tired of complicated starters with 300MB of dependencies which are hard to understand and modify?
 
 Try this simple well-commented starter with minimum dependencies.
